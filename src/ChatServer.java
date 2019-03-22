@@ -20,7 +20,8 @@ public class ChatServer {
     @OnMessage
     public void onMessage(String message, Session session) {
         System.out.println("Message from " + session.getId() + ": " + message);
-        SessionHandler.sendToAllConnectedSession(message);
+        String originRoomID = (String) session.getUserProperties().get("roomID");
+        SessionHandler.sendToAllConnectedSessionsInRoom(originRoomID, message);
     }
 
     @OnClose
