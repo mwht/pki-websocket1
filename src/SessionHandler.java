@@ -28,4 +28,10 @@ public class SessionHandler {
             }
         }
     }
+
+    public static void sendToAllConnectedSession(String message) {
+        for (Session session: sessions) {
+            sendToSession(session, message);
+        }
+    }
 }
