@@ -1,4 +1,5 @@
 import javax.websocket.Session;
+import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -13,7 +14,18 @@ public class SessionHandler {
         sessions.remove(session);
     }
 
-    public static void sendToSession(Session session) {
+    public static void sendToSession(Session session, String message) {
+        try {
+            session.getBasicRemote().sendText(message);
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
+            try {
+                session.close();
+            } catch (IOException e) { e.printStackTrace(); }
+            finally {
+                removeSession(session);
 
+            }
+        }
     }
 }
