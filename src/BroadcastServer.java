@@ -5,8 +5,8 @@ import javax.websocket.Session;
 import javax.websocket.server.ServerEndpoint;
 import java.io.IOException;
 
-@ServerEndpoint("/echo")
-public class EchoServer {
+@ServerEndpoint("/broadcast")
+public class BroadcastServer {
 
     @OnOpen
     public void onOpen(Session session) {
