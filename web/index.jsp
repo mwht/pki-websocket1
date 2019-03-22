@@ -13,6 +13,9 @@
   <input type="text" id="messageinput"/>
 </div>
 <div>
+  Room ID: <input type="number" id="roomid" value="1" />
+</div>
+<div>
   <button type="button" onclick="openSocket();" >Open</button>
   <button type="button" onclick="send();" >Send</button>
   <button type="button" onclick="closeSocket();" >Close</button>
@@ -34,7 +37,7 @@
       return;
     }
     // Create a new instance of the websocket
-    webSocket = new WebSocket("ws://localhost:8080/pki_websockets1_war_exploded/broadcast");
+    webSocket = new WebSocket("ws://localhost:8080/pki_websockets1_war_exploded/room/" + document.getElementById("roomid").value);
 
     /**
      * Binds functions to the listeners for the websocket.
