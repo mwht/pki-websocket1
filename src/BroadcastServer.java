@@ -10,26 +10,20 @@ public class BroadcastServer {
 
     @OnOpen
     public void onOpen(Session session) {
+        SessionHandler.addSession(session);
         System.out.println(session.getId() + " has established the connection.");
-        try {
-            session.getBasicRemote().sendText("Connection Established.");
-        } catch (IOException ioe) {
-            ioe.printStackTrace();
-        }
+        SessionHandler.sendToSession(session, "Connection established.");
     }
 
     @OnMessage
     public void onMessage(String message, Session session) {
         System.out.println("Message from " + session.getId() + ": " + message);
-        try {
-            session.getBasicRemote().sendText(message);
-        } catch (IOException ioe) {
-            ioe.printStackTrace();
-        }
+        SessionHandler.sendToAllConnectedSession(message);
     }
 
     @OnClose
     public void onClose(Session session) {
+        SessionHandler.removeSession(session);
         System.out.println("Session " + session.getId() + " has ended.");
     }
 }
