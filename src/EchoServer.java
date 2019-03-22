@@ -1,3 +1,4 @@
+import javax.websocket.OnClose;
 import javax.websocket.OnMessage;
 import javax.websocket.OnOpen;
 import javax.websocket.Session;
@@ -25,5 +26,10 @@ public class EchoServer {
         } catch (IOException ioe) {
             ioe.printStackTrace();
         }
+    }
+
+    @OnClose
+    public void onClose(Session session) {
+        System.out.println("Session " + session.getId() + " has ended.");
     }
 }
